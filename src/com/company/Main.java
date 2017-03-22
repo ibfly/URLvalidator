@@ -3,6 +3,8 @@ package com.company;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 //     Задача от НИКИТИНА
 public class Main {
@@ -10,13 +12,16 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String adress = reader.readLine();
+        String urlString = reader.readLine();
 
-        UrlValidator urlValidator = new UrlValidator();
-            if (urlValidator.isValid(adress)) {
-                System.out.println(" - Сайт существует");
-            } else {
-                System.out.println(" - Такого сайта нет");
+        URL url = new URL(urlString);
+        HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+        int responseCode = huc.getResponseCode();
+
+        if (responseCode != 404) {
+            System.out.println("Сайт существует");
+        } else {
+            System.out.println("Такого сайта нет");
         }
     }
 }
