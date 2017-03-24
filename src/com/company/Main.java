@@ -22,28 +22,21 @@ public class Main {
              System.out.println("Не доступен");
     }
     private static boolean isUrlValid(String u) {
-        boolean valid;
+        boolean valid = false;
         try {
             URL url = new URL(u);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
             huc.setInstanceFollowRedirects(false);
             int responseCode = huc.getResponseCode();
 
-            if (responseCode >= 400 && responseCode < 600 ) {
-                valid = false;
-            }
-            else {
+            if (responseCode < 400 )
                 valid = true;
-            }
         }
         catch (MalformedURLException e){
-            valid = false;
         }
         catch (UnknownHostException e) {
-            valid = false;
         }
         catch (Exception e) {
-            valid = false;
         }
         return valid;
     }
