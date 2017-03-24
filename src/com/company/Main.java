@@ -16,13 +16,12 @@ import java.util.Scanner;
 public class Main {
 
         private static List<String> data = new ArrayList<>();
-        private static Scanner scanner;
         private static final String FILE_PATH = "/JAVA/URLvalidator/config.txt";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        String urlString = reader.readLine();
-        readFile();
+        readConfig();
         for (String adr: data) {
             if(isUrlValid(adr))
                 System.out.println(adr + " - Доступен");
@@ -50,13 +49,11 @@ public class Main {
         }
         return valid;
     }
-    private static void readFile(){
-        try {
-            scanner = new Scanner(new File(FILE_PATH));
-            while (scanner.hasNext()){
-                data.add(scanner.next());
-            }
-        } catch (Exception e){JOptionPane.showMessageDialog(null,"Файл не найден");}
+    private static void readConfig() throws Exception {
+        Scanner scanner = new Scanner(new File(FILE_PATH));
+        while (scanner.hasNext()){
+            data.add(scanner.next());
+        }
     }
 }
 
