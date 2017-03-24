@@ -1,26 +1,36 @@
 package com.company;
 
+import javax.swing.*;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
-
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 //     Задача от НИКИТИНА
 public class Main {
 
+        private static List<String> data = new ArrayList<>();
+        private static Scanner scanner;
+        private static final String FILE_PATH = "/JAVA/URLvalidator/config.txt";
+
     public static void main(String[] args) throws IOException {
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String urlString = reader.readLine();
-
-        if(isUrlValid(urlString))
-            System.out.println("Доступен");
-          else
-             System.out.println("Не доступен");
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        String urlString = reader.readLine();
+        readFile();
+        for (String adr: data) {
+            if(isUrlValid(adr))
+                System.out.println(adr + " - Доступен");
+            else
+                System.out.println(adr + " - Не доступен");
+        }
     }
+
     public static boolean isUrlValid(String u) {
         boolean valid = false;
         try {
@@ -39,6 +49,14 @@ public class Main {
         catch (Exception e) {
         }
         return valid;
+    }
+    private static void readFile(){
+        try {
+            scanner = new Scanner(new File(FILE_PATH));
+            while (scanner.hasNext()){
+                data.add(scanner.next());
+            }
+        } catch (Exception e){JOptionPane.showMessageDialog(null,"Файл не найден");}
     }
 }
 
