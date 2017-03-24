@@ -21,7 +21,7 @@ public class Main {
           else
              System.out.println("Не доступен");
     }
-    private static boolean isUrlValid(String u) {
+    public static boolean isUrlValid(String u) {
         boolean valid = false;
         try {
             URL url = new URL(u);
