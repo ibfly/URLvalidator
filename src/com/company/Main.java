@@ -23,17 +23,16 @@ public class Main {
 //        String urlString = reader.readLine();
         try {
             readConfig();
+        }
+        catch (Exception e){
+            System.out.println("Ошибка");
+        }
             for (String adr: data) {
                 if(isUrlValid(adr))
                     System.out.println(adr + " - Доступен");
                 else
                     System.out.println(adr + " - Не доступен");
             }
-        }
-        catch (Exception e){
-            System.out.println("Ошибка");
-        }
-    
     }
 
     public static boolean isUrlValid(String u) {
