@@ -21,13 +21,19 @@ public class Main {
     public static void main(String[] args) throws Exception {
 //        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 //        String urlString = reader.readLine();
-        readConfig();
-        for (String adr: data) {
-            if(isUrlValid(adr))
-                System.out.println(adr + " - Доступен");
-            else
-                System.out.println(adr + " - Не доступен");
+        try {
+            readConfig();
+            for (String adr: data) {
+                if(isUrlValid(adr))
+                    System.out.println(adr + " - Доступен");
+                else
+                    System.out.println(adr + " - Не доступен");
+            }
         }
+        catch (Exception e){
+            System.out.println("Ошибка");
+        }
+    
     }
 
     public static boolean isUrlValid(String u) {
