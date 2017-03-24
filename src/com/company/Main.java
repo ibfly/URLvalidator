@@ -25,7 +25,7 @@ public class Main {
             readConfig();
         }
         catch (Exception e){
-            System.out.println("Ошибка");
+            System.out.println("Файл config.txt не найден");
         }
             for (String adr: data) {
                 if(isUrlValid(adr))
