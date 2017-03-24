@@ -16,11 +16,13 @@ public class Main {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String urlString = reader.readLine();
 
-        System.out.println(valid(urlString));
-
+        if(isUrlValid(urlString))
+            System.out.println("Доступен");
+          else
+             System.out.println("Не доступен");
     }
-    private static boolean valid(String u) {
-        boolean valid = false;
+    private static boolean isUrlValid(String u) {
+        boolean valid;
         try {
             URL url = new URL(u);
             HttpURLConnection huc = (HttpURLConnection) url.openConnection();
@@ -28,21 +30,20 @@ public class Main {
             int responseCode = huc.getResponseCode();
 
             if (responseCode >= 400 && responseCode < 600 ) {
-                System.out.println(" Не доступен");
+                valid = false;
             }
             else {
                 valid = true;
-                System.out.println("Доступен");
             }
         }
         catch (MalformedURLException e){
-            System.out.println("Ошибка протокола");
+            valid = false;
         }
         catch (UnknownHostException e) {
-            System.out.println("Сервер не доступен");
+            valid = false;
         }
         catch (Exception e) {
-            System.out.println("Ошибка");
+            valid = false;
         }
         return valid;
     }
