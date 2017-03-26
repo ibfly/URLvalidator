@@ -41,12 +41,12 @@ public class Main {
             }
         });
 
-            for (String adr: data) {
-                if(isUrlValid(adr))
-                    System.out.println(adr + " - Доступен");
-                else
-                    System.out.println(adr + " - Не доступен");
-            }
+//            for (String adr: data) {
+//                if(isUrlValid(adr))
+//                    System.out.println(adr + " - Доступен");
+//                else
+//                    System.out.println(adr + " - Не доступен");
+//            }
 
     }
 
@@ -127,6 +127,14 @@ public class Main {
                 System.exit(0);
             }
         });
+        
+        for (String adr: data) {
+            if(isUrlValid(adr))
+                System.out.println(adr + " - Доступен");
+            else
+                trayIcon.displayMessage(adr, " - Не доступен",
+                        TrayIcon.MessageType.INFO);
+        }
     }
     //Obtain the image URL
     protected static Image createImage(String path, String description) {
