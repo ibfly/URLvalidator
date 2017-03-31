@@ -5,6 +5,8 @@ import java.awt.event.*;
 import java.net.URL;
 import javax.swing.*;
 
+import static com.company.Main.isUrlValid;
+
 public class HideToSystemTray {
 
     static void createAndShowGUI() {
@@ -13,17 +15,22 @@ public class HideToSystemTray {
             System.out.println("SystemTray не поддерживается");
             return;
         }
+
         final PopupMenu popup = new PopupMenu();
         final TrayIcon trayIcon =
                 new TrayIcon(createImage("icon32.png", "tray icon"));
         final SystemTray tray = SystemTray.getSystemTray();
 
         // Create a popup menu components
+
+
         MenuItem aboutItem = new MenuItem("О программе");
 //
         MenuItem exitItem = new MenuItem("Выход");
 
         //Add components to popup menu
+
+
         popup.add(aboutItem);
         popup.addSeparator();
         popup.add(exitItem);
@@ -59,6 +66,17 @@ public class HideToSystemTray {
                 System.exit(0);
             }
         });
+
+        /////////
+
+//        while (true){
+//            if (isUrlValid(url))
+//                System.out.println(url + " - Доступен");
+//            else
+//                trayIcon.displayMessage(url, " - Не доступен",
+//                        TrayIcon.MessageType.INFO);
+//        }
+
     }
     //Obtain the image URL
     protected static Image createImage(String path, String description) {
