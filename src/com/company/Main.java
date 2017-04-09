@@ -13,8 +13,12 @@ import static com.company.HideToSystemTray.createAndShowGUI;
 
 //     Задача от НИКИТИНА
 public class Main {
+    static UserPreferences up = new UserPreferences();
+
 
     public static void main(String[] args) throws Exception {
+        up.resetTimes();
+
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String url = reader.readLine();
 

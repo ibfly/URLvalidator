@@ -6,6 +6,7 @@ import java.net.URL;
 import javax.swing.*;
 
 import static com.company.Main.isUrlValid;
+import static com.company.Main.up;
 
 public class HideToSystemTray {
 
@@ -18,20 +19,23 @@ public class HideToSystemTray {
 
         final PopupMenu popup = new PopupMenu();
         final TrayIcon trayIcon =
-                new TrayIcon(createImage("icon32.png", "tray icon"));
+                new TrayIcon(createImage("icon.png", "tray icon"));
         final SystemTray tray = SystemTray.getSystemTray();
 
         // Create a popup menu components
 
-
         MenuItem aboutItem = new MenuItem("О программе");
-//
+        MenuItem settingsItem = new MenuItem("Настройки");
+        MenuItem clearList = new MenuItem("Очистить список");
         MenuItem exitItem = new MenuItem("Выход");
 
         //Add components to popup menu
 
-
         popup.add(aboutItem);
+        popup.addSeparator();
+        popup.add(settingsItem);
+        popup.addSeparator();
+        popup.add(clearList);
         popup.addSeparator();
         popup.add(exitItem);
 
@@ -51,6 +55,18 @@ public class HideToSystemTray {
             }
         });
 
+        settingsItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showInputDialog("Введите URL:");
+            }
+        });
+
+        clearList.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                up.clearPreferences();
+            }
+        });
+
         aboutItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null,
@@ -67,8 +83,6 @@ public class HideToSystemTray {
             }
         });
 
-        /////////
-
 //        while (true){
 //            if (isUrlValid(url))
 //                System.out.println(url + " - Доступен");
@@ -76,7 +90,6 @@ public class HideToSystemTray {
 //                trayIcon.displayMessage(url, " - Не доступен",
 //                        TrayIcon.MessageType.INFO);
 //        }
-
     }
     //Obtain the image URL
     protected static Image createImage(String path, String description) {
