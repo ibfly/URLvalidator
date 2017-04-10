@@ -17,24 +17,20 @@ public class Main {
 
 
     public static void main(String[] args) throws Exception {
-        up.resetTimes();
-
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String url = reader.readLine();
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        String url = reader.readLine();
 
             while (true) {
-                if(isUrlValid(url)){
-                    System.out.println(url + " - Доступен");
+                if(isUrlValid(up.getUrl())){
+                    System.out.println(up.getUrl() + " - Доступен");
                     break;
                 }
                 else {
-                    System.out.println(url + " - Не доступен");
+                    System.out.println(up.getUrl() + " - Не доступен");
                     break;
                 }
             }
-//        UIManager.put("swing.boldMetal", Boolean.FALSE);
-        //Schedule a job for the event-dispatching thread:
-        //adding TrayIcon.
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();

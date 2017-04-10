@@ -6,27 +6,22 @@ import java.util.prefs.Preferences;
 
 public class UserPreferences {
     private Preferences userPrefs;
+    private String adr = "http://chuviha.ua";
     public UserPreferences()
     {
         userPrefs = Preferences.userRoot().node("prefs");
 
     }
 
-//    public void putData()
-//    {
-//        userPrefs.put("key", url);
-//    }
-
-    public void resetTimes()
+    public String getUrl()
     {
-        for (int i = 0; i < 5; i++) {
-            // «засыпаем»
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        String u = userPrefs.get("key",adr);
+        return u;
+    }
+
+    public void putData()
+    {
+         userPrefs.put("key", adr);
         // экспорт данных из реестра в xml.
         try {
             userPrefs.exportNode(new FileOutputStream("config.xml"));
@@ -35,7 +30,6 @@ public class UserPreferences {
             e.printStackTrace();
         }
     }
-
     public void clearPreferences()
     {
         try {
