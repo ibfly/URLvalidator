@@ -15,21 +15,17 @@ import static com.company.HideToSystemTray.createAndShowGUI;
 public class Main {
     static UserPreferences up = new UserPreferences();
 
-
     public static void main(String[] args) throws Exception {
-//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-//        String url = reader.readLine();
 
-            while (true) {
-                if(isUrlValid(up.getUrl())){
-                    System.out.println(up.getUrl() + " - Доступен");
-                    break;
+         for (String x :up.getData()){
+                if(isUrlValid(x)){
+                    System.out.println(x + " - Доступен");
                 }
                 else {
-                    System.out.println(up.getUrl() + " - Не доступен");
-                    break;
+                    System.out.println(x + " - Не доступен");
+
                 }
-            }
+        }
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {

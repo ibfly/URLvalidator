@@ -1,27 +1,29 @@
 package com.company;
 
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 public class UserPreferences {
-    private Preferences userPrefs;
-    private String adr = "http://chuviha.ua";
+    Preferences userPrefs;
     public UserPreferences()
     {
         userPrefs = Preferences.userRoot().node("prefs");
-
     }
 
-    public String getUrl()
-    {
-        String u = userPrefs.get("key",adr);
-        return u;
+    public List<String> getData() {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < 4; i++){
+            list.add(userPrefs.get(Integer.toString(i),null));
+        }
+        return list;
     }
 
     public void putData()
     {
-         userPrefs.put("key", adr);
+         userPrefs.put("0","https://youtube.com/" );
         // экспорт данных из реестра в xml.
         try {
             userPrefs.exportNode(new FileOutputStream("config.xml"));
