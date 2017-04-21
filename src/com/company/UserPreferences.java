@@ -10,7 +10,7 @@ public class UserPreferences {
     Preferences userPrefs;
     public UserPreferences()
     {
-        userPrefs = Preferences.userRoot().node("prefs");
+        userPrefs = Preferences.userRoot().node("urls");
     }
 
     public List<String> getData() throws BackingStoreException {
