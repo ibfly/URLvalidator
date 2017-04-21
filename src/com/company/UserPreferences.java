@@ -13,17 +13,11 @@ public class UserPreferences {
         userPrefs = Preferences.userRoot().node("prefs");
     }
 
-    public List<String> getData() {
+    public List<String> getData() throws BackingStoreException {
         List<String> list = new ArrayList<>();
-        for (int i = 0; i < 4; i++){
-            list.add(userPrefs.get(Integer.toString(i),null));
+        for (String key : userPrefs.keys()){
+            list.add(userPrefs.get(key,null));
         }
-        return list;
-    }
-
-    public void putData()
-    {
-         userPrefs.put("0","https://youtube.com/" );
         // экспорт данных из реестра в xml.
         try {
             userPrefs.exportNode(new FileOutputStream("config.xml"));
@@ -31,7 +25,20 @@ public class UserPreferences {
         catch(Exception e) {
             e.printStackTrace();
         }
+        return list;
     }
+
+    public void putData(List<String> list) {
+        try {
+            userPrefs.clear();
+        } catch (BackingStoreException e) {
+            e.printStackTrace();
+        }
+        for (int i = 0; i < list.size(); i++){
+            userPrefs.put(Integer.toString(i), list.get(i));
+        }
+    }
+
     public void clearPreferences()
     {
         try {

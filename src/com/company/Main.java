@@ -8,6 +8,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.company.HideToSystemTray.createAndShowGUI;
 
@@ -16,6 +18,16 @@ public class Main {
     static UserPreferences up = new UserPreferences();
 
     public static void main(String[] args) throws Exception {
+//       Тестовый список
+        List<String> list = new ArrayList<>();
+        list.add("http://exmo.com");
+        list.add("http://aliexpress.com");
+        list.add("http://chuva.ua");
+        list.add("http://figure.com");
+        list.add("qwerty");
+//       Тестовый список
+
+        up.putData(list);
 
          for (String x :up.getData()){
                 if(isUrlValid(x)){
