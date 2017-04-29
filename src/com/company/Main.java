@@ -1,49 +1,42 @@
 package com.company;
 
 import javax.swing.*;
-import java.io.BufferedReader;
-
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.prefs.BackingStoreException;
 
 import static com.company.HideToSystemTray.createAndShowGUI;
 
 //     Задача от НИКИТИНА
 public class Main {
-    static UserPreferences up = new UserPreferences();
+    public static UserPreferences up = new UserPreferences();
+    public static String urlsText = "";
 
     public static void main(String[] args) throws Exception {
-//       Тестовый список
-        List<String> list = new ArrayList<>();
-        list.add("http://exmo.com");
-        list.add("http://aliexpress.com");
-        list.add("http://chuva.ua");
-        list.add("http://figure.com");
-        list.add("qwerty");
-//       Тестовый список
 
-        up.putData(list);
-
-         for (String x :up.getData()){
-                if(isUrlValid(x)){
-                    System.out.println(x + " - Доступен");
-                }
-                else {
-                    System.out.println(x + " - Не доступен");
-
-                }
+        for (String x : up.getData()) {
+            urlsText += x + "\n";
         }
-
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 createAndShowGUI();
             }
         });
+    }
+
+    public static List<String> UrlValidCheck () throws BackingStoreException {
+        List<String> list = new ArrayList<>();
+        for (String x :up.getData()){
+            if(isUrlValid(x))
+                list.add(x + " - Доступен");
+                    else
+                        list.add(x + " - Доступен");
+        }
+        return list;
     }
 
     public static boolean isUrlValid(String u) {

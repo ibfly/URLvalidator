@@ -1,14 +1,13 @@
 package com.company;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.net.URL;
 import javax.swing.*;
 
-import static com.company.Main.isUrlValid;
 import static com.company.Main.up;
 
 public class HideToSystemTray {
+    public static WindowSettings ws;
 
     static void createAndShowGUI() {
         //Check the SystemTray support
@@ -48,48 +47,24 @@ public class HideToSystemTray {
             return;
         }
 
-        trayIcon.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,
-                        "Шо ты наделал");
-            }
-        });
+        trayIcon.addActionListener(e ->
+                JOptionPane.showMessageDialog(null, "Шо ты наделал"));
 
-        settingsItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showInputDialog("Введите URL:");
-            }
-        });
+        settingsItem.addActionListener(e -> ws = new WindowSettings());
 
-        clearList.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                up.clearPreferences();
-            }
-        });
+        clearList.addActionListener(e -> up.clearPreferences());
 
-        aboutItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null,
-                        "Дуже крута прога");
-            }
+        aboutItem.addActionListener(e -> {
+            JOptionPane.showMessageDialog(null,"Дуже крута прога");
         });
         // Моя вставка, установка авторазмера иконки
         trayIcon.setImageAutoSize(true);
         //
-        exitItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                tray.remove(trayIcon);
-                System.exit(0);
-            }
+        exitItem.addActionListener(e -> {
+            tray.remove(trayIcon);
+            System.exit(0);
         });
 
-//        while (true){
-//            if (isUrlValid(url))
-//                System.out.println(url + " - Доступен");
-//            else
-//                trayIcon.displayMessage(url, " - Не доступен",
-//                        TrayIcon.MessageType.INFO);
-//        }
     }
     //Obtain the image URL
     protected static Image createImage(String path, String description) {
