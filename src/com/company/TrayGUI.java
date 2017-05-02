@@ -34,9 +34,7 @@ public class TrayGUI {
         popup.addSeparator();
         popup.add(exitItem);
         urlsList.add(statusList);
-
-
-
+        
         trayIcon.setPopupMenu(popup);
 
         try {
