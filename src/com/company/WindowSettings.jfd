@@ -41,10 +41,6 @@
           <string>javax.swing.JPanel</string> 
           <object class="com.jformdesigner.model.FormLayoutManager"> 
            <class>com.jformdesigner.runtime.NullLayout</class> 
-           <void method="setProperty"> 
-            <string>autoSize</string> 
-            <boolean>false</boolean> 
-           </void> 
           </object> 
           <void property="name"> 
            <string>contentPanel</string> 
@@ -83,11 +79,11 @@
             </void> 
             <void method="setProperty"> 
              <string>width</string> 
-             <int>340</int> 
+             <int>360</int> 
             </void> 
             <void method="setProperty"> 
              <string>height</string> 
-             <int>170</int> 
+             <int>175</int> 
             </void> 
            </object> 
           </void> 
@@ -96,7 +92,7 @@
             <string>javax.swing.JLabel</string> 
             <void method="setProperty"> 
              <string>text</string> 
-             <string>Enter URLS</string> 
+             <string>Введите адреса сайтов: </string> 
             </void> 
             <void property="name"> 
              <string>label1</string> 
@@ -138,7 +134,7 @@
            <class>java.awt.GridBagLayout</class> 
            <void method="setProperty"> 
             <string>$columnSpecs</string> 
-            <string>0:1.0, 80, 80</string> 
+            <string>0:1.0, 80, 80, 0</string> 
            </void> 
            <void method="setProperty"> 
             <string>$rowSpecs</string> 
@@ -192,10 +188,6 @@
              <string>gridx</string> 
              <int>1</int> 
             </void> 
-            <void method="setProperty"> 
-             <string>gridy</string> 
-             <int>0</int> 
-            </void> 
            </object> 
           </void> 
           <void method="add"> 
@@ -203,7 +195,7 @@
             <string>javax.swing.JButton</string> 
             <void method="setProperty"> 
              <string>text</string> 
-             <string>Cancel</string> 
+             <string>Отмена</string> 
             </void> 
             <void property="name"> 
              <string>cancelButton</string> 
@@ -226,6 +218,33 @@
             <void method="setProperty"> 
              <string>gridy</string> 
              <int>0</int> 
+            </void> 
+           </object> 
+          </void> 
+          <void method="add"> 
+           <object class="com.jformdesigner.model.FormComponent"> 
+            <string>javax.swing.JButton</string> 
+            <void method="setProperty"> 
+             <string>text</string> 
+             <string>Применить</string> 
+            </void> 
+            <void property="name"> 
+             <string>button1</string> 
+            </void> 
+            <void method="addEvent"> 
+             <object class="com.jformdesigner.model.FormEvent"> 
+              <string>java.awt.event.ActionListener</string> 
+              <string>actionPerformed</string> 
+              <string>aplyActionPerformed</string> 
+              <boolean>true</boolean> 
+             </object> 
+            </void> 
+           </object> 
+           <object class="com.jformdesigner.model.FormLayoutConstraints"> 
+            <class>com.jformdesigner.runtime.GridBagConstraintsEx</class> 
+            <void method="setProperty"> 
+             <string>gridx</string> 
+             <int>3</int> 
             </void> 
            </object> 
           </void> 

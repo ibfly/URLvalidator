@@ -18,13 +18,6 @@ public class UserPreferences {
         for (String key : userPrefs.keys()){
             list.add(userPrefs.get(key,null));
         }
-        // экспорт данных из реестра в xml.
-        try {
-            userPrefs.exportNode(new FileOutputStream("config.xml"));
-        }
-        catch(Exception e) {
-            e.printStackTrace();
-        }
         return list;
     }
 
@@ -37,14 +30,11 @@ public class UserPreferences {
         for (int i = 0; i < list.size(); i++){
             userPrefs.put(Integer.toString(i), list.get(i));
         }
-    }
-
-    public void clearPreferences()
-    {
+        // экспорт данных из реестра в xml.
         try {
-            userPrefs.clear();
+            userPrefs.exportNode(new FileOutputStream("config.xml"));
         }
-        catch (BackingStoreException e) {
+        catch(Exception e) {
             e.printStackTrace();
         }
     }

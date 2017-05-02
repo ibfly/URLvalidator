@@ -8,29 +8,20 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.BackingStoreException;
-
-import static com.company.HideToSystemTray.createAndShowGUI;
+import static com.company.TrayGUI.trayGUI;
 
 //     Задача от НИКИТИНА
 public class Main {
-    public static UserPreferences up = new UserPreferences();
-    public static String urlsText = "";
+    public static UserPreferences preferences = new UserPreferences();
 
     public static void main(String[] args) throws Exception {
 
-        for (String x : up.getData()) {
-            urlsText += x + "\n";
-        }
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                createAndShowGUI();
-            }
-        });
+        SwingUtilities.invokeLater(() -> trayGUI());
     }
 
     public static List<String> UrlValidCheck () throws BackingStoreException {
         List<String> list = new ArrayList<>();
-        for (String x :up.getData()){
+        for (String x :preferences.getData()){
             if(isUrlValid(x))
                 list.add(x + " - Доступен");
                     else

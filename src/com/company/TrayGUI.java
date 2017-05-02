@@ -4,12 +4,10 @@ import java.awt.*;
 import java.net.URL;
 import javax.swing.*;
 
-import static com.company.Main.up;
+public class TrayGUI {
+    public static WindowSettings window;
 
-public class HideToSystemTray {
-    public static WindowSettings ws;
-
-    static void createAndShowGUI() {
+    static void trayGUI() {
         //Check the SystemTray support
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray не поддерживается");
@@ -18,25 +16,26 @@ public class HideToSystemTray {
 
         final PopupMenu popup = new PopupMenu();
         final TrayIcon trayIcon =
-                new TrayIcon(createImage("icon.png", "tray icon"));
+                new TrayIcon(iconImage("icon/icon.png", "tray icon"));
         final SystemTray tray = SystemTray.getSystemTray();
 
         // Create a popup menu components
 
-        MenuItem aboutItem = new MenuItem("О программе");
-        MenuItem settingsItem = new MenuItem("Настройки");
-        MenuItem clearList = new MenuItem("Очистить список");
+        MenuItem settingsItem = new MenuItem("Настройки...");
+        Menu urlsList = new Menu("Статус адресов ");
         MenuItem exitItem = new MenuItem("Выход");
+        MenuItem statusList = new MenuItem("Реализовать");
 
         //Add components to popup menu
 
-        popup.add(aboutItem);
-        popup.addSeparator();
         popup.add(settingsItem);
         popup.addSeparator();
-        popup.add(clearList);
+        popup.add(urlsList);
         popup.addSeparator();
         popup.add(exitItem);
+        urlsList.add(statusList);
+
+
 
         trayIcon.setPopupMenu(popup);
 
@@ -47,16 +46,10 @@ public class HideToSystemTray {
             return;
         }
 
-        trayIcon.addActionListener(e ->
-                JOptionPane.showMessageDialog(null, "Шо ты наделал"));
+        settingsItem.addActionListener(e -> window = new WindowSettings());
 
-        settingsItem.addActionListener(e -> ws = new WindowSettings());
+        urlsList.addActionListener(e -> System.out.println("Реализовать!!!"));
 
-        clearList.addActionListener(e -> up.clearPreferences());
-
-        aboutItem.addActionListener(e -> {
-            JOptionPane.showMessageDialog(null,"Дуже крута прога");
-        });
         // Моя вставка, установка авторазмера иконки
         trayIcon.setImageAutoSize(true);
         //
@@ -64,14 +57,13 @@ public class HideToSystemTray {
             tray.remove(trayIcon);
             System.exit(0);
         });
-
     }
     //Obtain the image URL
-    protected static Image createImage(String path, String description) {
-        URL imageURL = HideToSystemTray.class.getResource(path);
+    protected static Image iconImage(String path, String description) {
+        URL imageURL = TrayGUI.class.getResource(path);
 
         if (imageURL == null) {
-            System.err.println("Resource not found: " + path);
+            System.err.println("Файл иконки не найден: " + path);
             return null;
         } else {
             return (new ImageIcon(imageURL, description)).getImage();
