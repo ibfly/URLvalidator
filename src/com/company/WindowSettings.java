@@ -47,12 +47,14 @@ public class WindowSettings extends JFrame {
 		{
 			dialogPane.setBorder(new EmptyBorder(12, 12, 12, 12));
 			dialogPane.setLayout(new BorderLayout());
+
 			//======== contentPanel ========
 			{
-				contentPanel.setLayout(null);
+				contentPanel.setLayout(new BorderLayout());
 
 				//======== scrollPane1 ========
 				{
+
 					//---- textArea1 ----
 					try {
 						textArea1.setText(String.join("\n", preferences.getData()));
@@ -61,27 +63,11 @@ public class WindowSettings extends JFrame {
 					}
 					scrollPane1.setViewportView(textArea1);
 				}
-				contentPanel.add(scrollPane1);
-				scrollPane1.setBounds(5, 35, 360, 175);
+				contentPanel.add(scrollPane1, BorderLayout.CENTER);
 
 				//---- label1 ----
 				label1.setText("Введите адреса сайтов:");
-				contentPanel.add(label1);
-				label1.setBounds(10, 5, 160, 20);
-
-				{ // compute preferred size
-					Dimension preferredSize = new Dimension();
-					for(int i = 0; i < contentPanel.getComponentCount(); i++) {
-						Rectangle bounds = contentPanel.getComponent(i).getBounds();
-						preferredSize.width = Math.max(bounds.x + bounds.width, preferredSize.width);
-						preferredSize.height = Math.max(bounds.y + bounds.height, preferredSize.height);
-					}
-					Insets insets = contentPanel.getInsets();
-					preferredSize.width += insets.right;
-					preferredSize.height += insets.bottom;
-					contentPanel.setMinimumSize(preferredSize);
-					contentPanel.setPreferredSize(preferredSize);
-				}
+				contentPanel.add(label1, BorderLayout.NORTH);
 			}
 			dialogPane.add(contentPanel, BorderLayout.CENTER);
 
@@ -96,22 +82,22 @@ public class WindowSettings extends JFrame {
 				okButton.setText("OK");
 				okButton.addActionListener(e -> okButtonActionPerformed(e));
 				buttonBar.add(okButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
-						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-						new Insets(0, 0, 0, 5), 0, 0));
+					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+					new Insets(0, 0, 0, 5), 0, 0));
 
 				//---- cancelButton ----
-				cancelButton.setText("Cancel");
+				cancelButton.setText("Отмена");
 				cancelButton.addActionListener(e -> cancelButtonActionPerformed(e));
 				buttonBar.add(cancelButton, new GridBagConstraints(2, 0, 1, 1, 0.0, 0.0,
-						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-						new Insets(0, 0, 0, 5), 0, 0));
+					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+					new Insets(0, 0, 0, 5), 0, 0));
 
-				//---- button1 ----
+				//---- aplyButton ----
 				aplyButton.setText("Применить");
 				aplyButton.addActionListener(e -> aplyActionPerformed(e));
 				buttonBar.add(aplyButton, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0,
-						GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-						new Insets(0, 0, 0, 0), 0, 0));
+					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+					new Insets(0, 0, 0, 0), 0, 0));
 			}
 			dialogPane.add(buttonBar, BorderLayout.SOUTH);
 		}
@@ -123,6 +109,7 @@ public class WindowSettings extends JFrame {
 		// My edit
 //		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(395,320);
+		setMinimumSize(new Dimension(310, 300));
 		setVisible(true);
 
 	}

@@ -2,12 +2,15 @@ package com.company;
 
 import java.awt.*;
 import java.net.URL;
+import java.util.prefs.BackingStoreException;
 import javax.swing.*;
+
+import static com.company.Main.UrlValidCheck;
 
 public class TrayGUI {
     public static WindowSettings window;
 
-    static void trayGUI() {
+    static void trayGUI() throws BackingStoreException {
         //Check the SystemTray support
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray не поддерживается");
@@ -24,17 +27,19 @@ public class TrayGUI {
         MenuItem settingsItem = new MenuItem("Настройки...");
         Menu urlsList = new Menu("Статус адресов ");
         MenuItem exitItem = new MenuItem("Выход");
-        MenuItem statusList = new MenuItem("Реализовать");
 
         //Add components to popup menu
-
         popup.add(settingsItem);
         popup.addSeparator();
         popup.add(urlsList);
         popup.addSeparator();
         popup.add(exitItem);
-        urlsList.add(statusList);
-        
+
+        for (String x: UrlValidCheck()) {
+            MenuItem statusList = new MenuItem(x);
+            urlsList.add(statusList);
+        }
+
         trayIcon.setPopupMenu(popup);
 
         try {
@@ -46,7 +51,7 @@ public class TrayGUI {
 
         settingsItem.addActionListener(e -> window = new WindowSettings());
 
-        urlsList.addActionListener(e -> System.out.println("Реализовать!!!"));
+//        urlsList.addActionListener(e -> System.out.println("Реализовать!!!"));
 
         // Моя вставка, установка авторазмера иконки
         trayIcon.setImageAutoSize(true);
