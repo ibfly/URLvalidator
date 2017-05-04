@@ -7,14 +7,16 @@ import java.util.prefs.BackingStoreException;
 import javax.swing.*;
 import javax.swing.border.*;
 import static com.company.Main.preferences;
+import static com.company.TrayGUI.Status;
 
 public class WindowSettings extends JFrame {
 	public WindowSettings() {
 		initComponents();
 	}
 
-	private void okButtonActionPerformed(ActionEvent e) {
+	private void okButtonActionPerformed(ActionEvent e) throws BackingStoreException {
 		preferences.putData(Arrays.asList(textArea1.getText().split("\\n")));
+		Status();
 		dispose();
 	}
 
@@ -22,8 +24,9 @@ public class WindowSettings extends JFrame {
 		dispose();
 	}
 
-	private void aplyActionPerformed(ActionEvent e) {
+	private void aplyActionPerformed(ActionEvent e) throws BackingStoreException {
 		preferences.putData(Arrays.asList(textArea1.getText().split("\\n")));
+		Status();
 	}
 
 	private void initComponents() {
@@ -80,7 +83,13 @@ public class WindowSettings extends JFrame {
 
 				//---- okButton ----
 				okButton.setText("OK");
-				okButton.addActionListener(e -> okButtonActionPerformed(e));
+				okButton.addActionListener(e -> {
+					try {
+						okButtonActionPerformed(e);
+					} catch (BackingStoreException e1) {
+						e1.printStackTrace();
+					}
+				});
 				buttonBar.add(okButton, new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(0, 0, 0, 5), 0, 0));
@@ -94,7 +103,13 @@ public class WindowSettings extends JFrame {
 
 				//---- aplyButton ----
 				aplyButton.setText("Применить");
-				aplyButton.addActionListener(e -> aplyActionPerformed(e));
+				aplyButton.addActionListener(e -> {
+					try {
+						aplyActionPerformed(e);
+					} catch (BackingStoreException e1) {
+						e1.printStackTrace();
+					}
+				});
 				buttonBar.add(aplyButton, new GridBagConstraints(3, 0, 1, 1, 0.0, 0.0,
 					GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 					new Insets(0, 0, 0, 0), 0, 0));
@@ -105,13 +120,10 @@ public class WindowSettings extends JFrame {
 		pack();
 		setLocationRelativeTo(getOwner());
 		// JFormDesigner - End of component initialization  //GEN-END:initComponents
-
-		// My edit
-//		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		// Параметры окна
 		setSize(395,320);
 		setMinimumSize(new Dimension(310, 300));
 		setVisible(true);
-
 	}
 
 	// JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables

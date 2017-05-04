@@ -4,17 +4,13 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.prefs.BackingStoreException;
-import java.util.prefs.PreferenceChangeEvent;
-import java.util.prefs.PreferenceChangeListener;
 import java.util.prefs.Preferences;
 
-public class UserPreferences implements PreferenceChangeListener {
+public class UserPreferences {
     Preferences userPrefs;
     public UserPreferences()
     {
         userPrefs = Preferences.userRoot().node("urls");
-
-        userPrefs.addPreferenceChangeListener(this);
     }
 
     public List<String> getData() throws BackingStoreException {
@@ -40,15 +36,6 @@ public class UserPreferences implements PreferenceChangeListener {
         }
         catch(Exception e) {
             e.printStackTrace();
-        }
-    }
-    // Это наш обработчик событий при изменении параметров в реестре
-    public void preferenceChange(PreferenceChangeEvent e)
-    {
-        try {
-            getData();
-        } catch (BackingStoreException e1) {
-            e1.printStackTrace();
         }
     }
 }

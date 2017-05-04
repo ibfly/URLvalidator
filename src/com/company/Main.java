@@ -25,7 +25,7 @@ public class Main {
         });
     }
 
-    public static List<String> UrlValidCheck () throws BackingStoreException {
+    public static List<String> UrlValidCheck() throws BackingStoreException {
         List<String> list = new ArrayList<>();
         for (String x :preferences.getData()){
             if(isUrlValid(x)) list.add(CutUrl(x) + " - Доступен");

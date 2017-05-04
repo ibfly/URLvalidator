@@ -4,28 +4,25 @@ import java.awt.*;
 import java.net.URL;
 import java.util.prefs.BackingStoreException;
 import javax.swing.*;
-
 import static com.company.Main.UrlValidCheck;
 
 public class TrayGUI {
     public static WindowSettings window;
+    public static Menu urlsList;
 
     static void trayGUI() throws BackingStoreException {
-        //Check the SystemTray support
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray не поддерживается");
             return;
         }
 
         final PopupMenu popup = new PopupMenu();
-        final TrayIcon trayIcon =
-                new TrayIcon(iconImage("icon/icon.png", "tray icon"));
+        final TrayIcon trayIcon = new TrayIcon(iconImage("icon/icon.png", "tray icon"));
         final SystemTray tray = SystemTray.getSystemTray();
 
         // Create a popup menu components
-
         MenuItem settingsItem = new MenuItem("Настройки...");
-        Menu urlsList = new Menu("Статус адресов ");
+        urlsList = new Menu("Статус адресов ");
         MenuItem exitItem = new MenuItem("Выход");
 
         //Add components to popup menu
@@ -35,10 +32,7 @@ public class TrayGUI {
         popup.addSeparator();
         popup.add(exitItem);
 
-        for (String x: UrlValidCheck()) {
-            MenuItem statusList = new MenuItem(x);
-            urlsList.add(statusList);
-        }
+        Status();
 
         trayIcon.setPopupMenu(popup);
 
@@ -51,15 +45,20 @@ public class TrayGUI {
 
         settingsItem.addActionListener(e -> window = new WindowSettings());
 
-//        urlsList.addActionListener(e -> System.out.println("Реализовать!!!"));
-
-        // Моя вставка, установка авторазмера иконки
-        trayIcon.setImageAutoSize(true);
-        //
         exitItem.addActionListener(e -> {
             tray.remove(trayIcon);
             System.exit(0);
         });
+
+        trayIcon.setImageAutoSize(true); // Авторазмер иконки
+    }
+    // Обработка статуса
+    public static void Status() throws BackingStoreException {
+        urlsList.removeAll();
+        for (String x: UrlValidCheck()) {
+            MenuItem statusList = new MenuItem(x);
+            urlsList.add(statusList);
+        }
     }
     //Obtain the image URL
     protected static Image iconImage(String path, String description) {
